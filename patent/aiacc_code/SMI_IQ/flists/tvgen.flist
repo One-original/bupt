@@ -1,0 +1,6 @@
+# Source file list for TVGen
+# One file per line.
+
+app/main.cpp
+app/tvgen.cpp
+app/app_json_parser.cpp

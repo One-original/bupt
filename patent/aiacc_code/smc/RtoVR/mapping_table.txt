@@ -1,0 +1,98 @@
+================================================================
+RtoVR (DR/UR to DVR/UVR datapath) 接口与编号整理
+================================================================
+
+1. 输出接口整理 (Outputs - DVR/UVR)
+这些信号是 RtoVR 模块输出到计算单元 (DVR) 或用户寄存器写入接口 (UVR) 的数据。
+根据设计，mv_out 指令支持最多 40 个输出端口 (编号 0-39)。
+
+编号 | 接口名称 (Name)               | 功能含义
+----------------------------------------------------------------
+0    | DVR-INTADD-S0                | 整数加法器输入数据0
+1    | DVR-INTADD-S1                | 整数加法器输入数据1
+2    | DVR-INTADD-S2                | 整数加法器输入数据2
+3    | DVR-FPMUL-S0                 | 浮点乘法器输入数据0
+4    | DVR-FPMUL-S1                 | 浮点乘法器输入数据1
+5    | DVR-FPADD-S0                 | 浮点加法器输入数据0
+6    | DVR-FPADD-S1                 | 浮点加法器输入数据1
+7    | DVR-FPtoFP-S                 | 浮点转换输入数据
+8    | DVR-INTtoINT-S               | 整数转换输入数据
+9    | DVR-FPtoINT-S                | 浮点转整数输入数据
+10   | DVR-INTtoFP-S                | 整数转浮点输入数据
+11   | DVR-LOGIC-S0                 | 逻辑单元输入数据0
+12   | DVR-LOGIC-S1                 | 逻辑单元输入数据1
+13   | DVR-LOGIC-ST                 | 逻辑单元源状态寄存器
+14   | DVR-VIN0-S                   | 向量输入流水线寄存器0
+15   | DVR-VIN1-S                   | 向量输入流水线寄存器1
+16   | DVR-VOUT0-S                  | 向量输出流水线寄存器0
+17   | DVR-INT8toFP16-S0            | INT8转FP16输入数据0
+18   | DVR-INT8toFP16-S1            | INT8转FP16输入数据1
+19   | DVR-FP16MUL-S0               | FP16乘法器输入数据0
+20   | DVR-FP16MUL-S1               | FP16乘法器输入数据1
+21   | DVR-FP16MUL-S2               | FP16乘法器输入数据2
+22   | DVR-FP16MUL-S3               | FP16乘法器输入数据3
+23   | DVR-FP16MUL-S4567            | FP16乘法器本地输入组
+24   | DVR-FP32ADDTREE5TO1-S0       | FP32加法树 5to1 输入0
+25   | DVR-FP32ADDTREE5TO1-S1       | FP32加法树 5to1 输入1
+26   | DVR-FP32ADDTREE5TO1-S2       | FP32加法树 5to1 输入2
+27   | DVR-FP32ADDTREE5TO1-S3       | FP32加法树 5to1 输入3
+28   | DVR-FP32ADDTREE5TO1-S4       | FP32加法树 5to1 输入4
+29   | DVR-FP32ADDTREE5TO1-S5       | FP32加法树 5to1 输入5
+30   | DVR-FP32ADDTREE5TO1-S6       | FP32加法树 5to1 输入6
+31   | DVR-FP32ADDTREE5TO1-S7       | FP32加法树 5to1 输入7
+32   | DVR-FP32ADDTREE8TO1-S0       | FP32加法树 8to1 输入0
+33   | DVR-FP32ADDTREE8TO1-S1       | FP32加法树 8to1 输入1
+34   | DVR-SHIFTDN-S                | 向下移位单元输入
+35   | UVR-WDATA-0                  | 用户寄存器写数据端口0
+36   | UVR-WDATA-1                  | 用户寄存器写数据端口1
+37   | UVR-WDATA-2                  | 用户寄存器写数据端口2
+38   | UVR-WDATA-3                  | 用户寄存器写数据端口3
+(39) | (mv_out39)                   | (微指令中定义的最后一个输出端口)
+
+
+2. 输入接口整理 (Inputs - DR/UR)
+这些信号是 RtoVR 模块接收的来自计算单元输出寄存器 (DR) 或用户寄存器 (UR) 的数据。
+设计支持最多 64 个输入源 (编号 0-63)。
+
+编号 | 接口名称 (Name)               | 功能含义
+----------------------------------------------------------------
+0    | DR-INTADD-D0                 | 整数加法器输出0
+1    | DR-INTADD-D1                 | 整数加法器输出1
+2    | DR-INTADD-ST                 | 整数加法器状态
+3    | DR-FPMUL-D                   | 浮点乘法器输出
+4    | DR-FPADD-D                   | 浮点加法器输出
+5    | DR-FPADD-ST                  | 浮点加法器状态
+6    | DR-FPtoFP-D                  | 浮点转换输出
+7    | DR-INTtoINT-D                | 整数转换输出
+8    | DR-FPtoINT-D                 | 浮点转整数输出
+9    | DR-INTtoFP-D                 | 整数转浮点输出
+10   | DR-LOGIC-D                   | 逻辑单元输出
+11   | DR-VIN0-D                    | 向量输入流水线寄存器0输出
+12   | DR-VIN1-D                    | 向量输入流水线寄存器1输出
+13   | DR-VOUT0-D                   | 向量输出流水线寄存器0输出
+14   | DR-INT8toFP16-D0             | INT8转FP16输出0
+15   | DR-INT8toFP16-D1             | INT8转FP16输出1
+16   | DR-INT8toFP16-D2             | INT8转FP16输出2
+17   | DR-INT8toFP16-D3             | INT8转FP16输出3
+18   | DR-FP16MUL-D0                | FP16乘法器输出0
+19   | DR-FP16MUL-D1                | FP16乘法器输出1
+20   | DR-FP16MUL-D2                | FP16乘法器输出2
+21   | DR-FP16MUL-D3                | FP16乘法器输出3
+22   | DR-FP16MUL-D4                | FP16乘法器输出4
+23   | DR-FP16MUL-D5                | FP16乘法器输出5
+24   | DR-FP16MUL-D6                | FP16乘法器输出6
+25   | DR-FP16MUL-D7                | FP16乘法器输出7
+26   | DR-FP32ADDTREE5TO1-D0        | FP32加法树 5to1 输出0
+27   | DR-FP32ADDTREE5TO1-D1        | FP32加法树 5to1 输出1
+28   | DR-FP32ADDTREE8TO1-D         | FP32加法树 8to1 输出
+29   | DR-SHIFTUP-D                 | 向上移位单元输出
+30   | UR-RDATA-0                   | 用户寄存器读数据0
+31   | UR-RDATA-1                   | 用户寄存器读数据1
+32   | UR-RDATA-2                   | 用户寄存器读数据2
+33   | UR-RDATA-3                   | 用户寄存器读数据3
+
+================================================================
+数据位宽说明：以上所有数据信号均为 128 bit。
+控制信号说明：模块受 CRU-RTOVR (输入) 指令控制，通过 mv_out* 编码选择输入。
+================================================================
+```
