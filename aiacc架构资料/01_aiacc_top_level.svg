@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940">
+  <defs>
+    <style>
+      .t{font-family:'Microsoft YaHei','Segoe UI',Arial,sans-serif;fill:#18324B}.title{font-size:30px;font-weight:700}.sub{font-size:15px;fill:#5B6B7C}.h{font-size:17px;font-weight:700}.b{font-size:16px;font-weight:600}.s{font-size:13px;fill:#42586B}.xs{font-size:12px;fill:#5B6B7C}.outline{stroke:#92A4B5;stroke-width:1.5;fill:#fff}.plane{fill:#F7FAFC;stroke:#CBD7E2;stroke-width:1.5}.ctrl{fill:#F1EBFF;stroke:#7046C7;stroke-width:2}.data{fill:#E6F7F8;stroke:#007C91;stroke-width:2}.mem{fill:#FFF3E9;stroke:#E98236;stroke-width:2}.tile{fill:#EEF4FF;stroke:#2D70B7;stroke-width:2}.ext{fill:#F4F6F8;stroke:#68798A;stroke-width:2}.line-c{fill:none;stroke:#7046C7;stroke-width:2.5;marker-end:url(#a-c)}.line-d{fill:none;stroke:#007C91;stroke-width:3;marker-end:url(#a-d)}.line-m{fill:none;stroke:#E98236;stroke-width:3;marker-end:url(#a-m)}.dash{fill:none;stroke:#7046C7;stroke-width:2;stroke-dasharray:7 6;marker-end:url(#a-c)}
+    </style>
+    <marker id="a-c" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#7046C7"/></marker>
+    <marker id="a-d" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#007C91"/></marker>
+    <marker id="a-m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#E98236"/></marker>
+  </defs>
+  <rect width="1600" height="940" fill="#FFFFFF"/>
+  <text x="54" y="58" class="t title">AIACC / NPU Compute Subsystem — Top-Level Architecture</text>
+  <text x="54" y="84" class="t sub">面试白板版：先分清指令控制面与高带宽数据面，再展示 Tile 集群、片上存储与外部内存的关系</text>
+  <g transform="translate(1114 10)"><rect x="0" y="0" width="130" height="24" rx="4" class="ctrl"/><text x="144" y="17" class="t xs">控制 / 微指令</text><rect x="0" y="34" width="130" height="24" rx="4" class="data"/><text x="144" y="51" class="t xs">片上数据流</text><rect x="0" y="68" width="130" height="24" rx="4" class="mem"/><text x="144" y="85" class="t xs">存储 / DMA</text></g>
+
+  <rect x="282" y="120" width="1032" height="734" rx="16" fill="#FCFDFE" stroke="#18324B" stroke-width="2.5"/>
+  <text x="315" y="156" class="t h">AIACC / NPU Accelerator</text>
+  <rect x="316" y="178" width="964" height="258" rx="12" class="plane"/>
+  <text x="342" y="211" class="t h" fill="#7046C7">COMMAND &amp; CONTROL PLANE</text>
+  <rect x="316" y="464" width="964" height="354" rx="12" class="plane"/>
+  <text x="342" y="497" class="t h" fill="#007C91">DATA / MEMORY PLANE</text>
+
+  <rect x="48" y="314" width="180" height="138" rx="10" class="ext"/>
+  <text x="74" y="352" class="t h">Host CPU / SoC</text><text x="74" y="380" class="t s">Runtime / Driver</text><text x="74" y="404" class="t s">Command buffer</text><text x="74" y="428" class="t s">Doorbell / IRQ</text>
+  <rect x="1362" y="578" width="188" height="155" rx="10" class="mem"/>
+  <text x="1408" y="620" class="t h">HBM / DDR</text><text x="1402" y="649" class="t s">Weights / Activations</text><text x="1413" y="676" class="t s">Input / Output</text><text x="1424" y="703" class="t s">AXI4 / 128-bit+</text>
+
+  <rect x="358" y="254" width="154" height="92" rx="8" class="ctrl"/>
+  <text x="382" y="288" class="t b">AXI Slave</text><text x="375" y="314" class="t s">MMIO / Command</text>
+  <rect x="358" y="356" width="154" height="48" rx="8" class="ctrl"/>
+  <text x="383" y="386" class="t b">CSR + Trigger</text>
+  <rect x="559" y="254" width="166" height="150" rx="8" class="ctrl"/>
+  <text x="588" y="286" class="t b">SMI Front End</text><text x="581" y="314" class="t s">Packet parser</text><text x="581" y="338" class="t s">Instruction decode</text><text x="581" y="362" class="t s">Loop / delay control</text><text x="581" y="386" class="t s">Micro-op expansion</text>
+  <rect x="772" y="254" width="164" height="150" rx="8" class="ctrl"/>
+  <text x="803" y="286" class="t b">IQ Dispatch</text><text x="801" y="314" class="t s">Queue routing</text><text x="801" y="338" class="t s">Ready / valid</text><text x="801" y="362" class="t s">Backpressure</text><text x="801" y="386" class="t s">SID / SMC ID</text>
+  <rect x="983" y="254" width="242" height="150" rx="8" class="ctrl"/>
+  <text x="1026" y="286" class="t b">Cluster Controller</text><text x="1017" y="314" class="t s">Issue / dependency control</text><text x="1017" y="338" class="t s">Multi-SMC work partition</text><text x="1017" y="362" class="t s">Status / performance counters</text>
+
+  <rect x="358" y="548" width="190" height="184" rx="8" class="mem"/>
+  <text x="399" y="582" class="t b">Load / Store Engine</text><text x="393" y="610" class="t s">LDB / STB</text><text x="382" y="636" class="t s">Burst / alignment</text><text x="382" y="662" class="t s">Address windowing</text><text x="382" y="688" class="t s">DMA request queue</text>
+  <rect x="595" y="704" width="628" height="75" rx="8" class="data"/>
+  <text x="791" y="737" class="t b">On-chip NoC / Data Crossbar</text><text x="770" y="762" class="t s">128-bit vector data · Broadcast · Multicast · Return path</text>
+  <rect x="595" y="534" width="628" height="145" rx="10" fill="#F8FBFF" stroke="#2D70B7" stroke-width="1.8"/>
+  <text x="620" y="562" class="t h" fill="#2D70B7">SMC COMPUTE TILE CLUSTER</text>
+  <g>
+    <rect x="620" y="582" width="125" height="74" rx="7" class="tile"/><text x="655" y="612" class="t b">SMC 0</text><text x="641" y="636" class="t xs">CRU · UR · FUs</text>
+    <rect x="768" y="582" width="125" height="74" rx="7" class="tile"/><text x="803" y="612" class="t b">SMC 1</text><text x="789" y="636" class="t xs">CRU · UR · FUs</text>
+    <rect x="916" y="582" width="125" height="74" rx="7" class="tile"/><text x="951" y="612" class="t b">SMC 2</text><text x="937" y="636" class="t xs">CRU · UR · FUs</text>
+    <rect x="1064" y="582" width="125" height="74" rx="7" class="tile"/><text x="1099" y="612" class="t b">SMC N</text><text x="1085" y="636" class="t xs">CRU · UR · FUs</text>
+  </g>
+  <text x="1050" y="155" class="t xs">scalable: 1 / 2 / 4 / 8 SMC</text>
+
+  <path d="M228 355 H358" class="line-c"/><text x="243" y="341" class="t xs" fill="#7046C7">AXI4-Lite / MMIO</text>
+  <path d="M512 300 H559" class="line-c"/><path d="M725 330 H772" class="line-c"/><path d="M936 330 H983" class="line-c"/>
+  <path d="M435 346 V356" class="line-c"/><path d="M512 380 H559" class="dash"/>
+  <path d="M855 404 V518 H680 V582" class="dash"/><path d="M855 518 H828 V582" class="dash"/><path d="M855 518 H976 V582" class="dash"/><path d="M855 518 H1124 V582" class="dash"/>
+  <text x="870" y="474" class="t xs" fill="#7046C7">IQ micro-ops</text>
+  <path d="M1362 631 H1280 V640 H548" class="line-m"/><text x="1134" y="620" class="t xs" fill="#E98236">AXI4 bursts · read / write</text>
+  <path d="M548 667 H595 V741" class="line-d"/><path d="M682 679 V704" class="line-d"/><path d="M830 679 V704" class="line-d"/><path d="M978 679 V704" class="line-d"/><path d="M1126 679 V704" class="line-d"/>
+  <path d="M595 754 H548 V692" class="line-d"/>
+  <path d="M1223 741 H1280 V680 H1362" class="line-m"/>
+  <path d="M1225 330 H1323 V451 H228" class="dash"/><text x="1327" y="394" class="t xs" fill="#7046C7">status / interrupt</text>
+  <text x="54" y="888" class="t s">讲图顺序：Host 写命令 → SMI 解析并分发 IQ → CRU 驱动 SMC 计算 → LDB/STB 与 UR 完成数据搬运与复用 → HBM 写回与状态返回。</text>
+</svg>

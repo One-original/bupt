@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940">
+  <defs>
+    <style>
+      .t{font-family:'Microsoft YaHei','Segoe UI',Arial,sans-serif;fill:#18324B}.title{font-size:30px;font-weight:700}.sub{font-size:15px;fill:#5B6B7C}.h{font-size:17px;font-weight:700}.b{font-size:16px;font-weight:600}.s{font-size:13px;fill:#42586B}.xs{font-size:12px;fill:#5B6B7C}.plane{fill:#F7FAFC;stroke:#CBD7E2;stroke-width:1.5}.ctrl{fill:#F1EBFF;stroke:#7046C7;stroke-width:2}.data{fill:#E6F7F8;stroke:#007C91;stroke-width:2}.ext{fill:#F4F6F8;stroke:#68798A;stroke-width:2}.line{fill:none;stroke:#7046C7;stroke-width:2.7;marker-end:url(#a)}.dash{fill:none;stroke:#7046C7;stroke-width:2;stroke-dasharray:7 6;marker-end:url(#a)}.ret{fill:none;stroke:#64748B;stroke-width:2;stroke-dasharray:5 5;marker-end:url(#r)}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#7046C7"/></marker>
+    <marker id="r" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#64748B"/></marker>
+  </defs>
+  <rect width="1600" height="940" fill="#FFFFFF"/>
+  <text x="54" y="58" class="t title">SMI Instruction Front End &amp; IQ Dispatch Architecture</text>
+  <text x="54" y="84" class="t sub">从 Host 命令写入到 IQ 微指令发射：解析、配置、展开、路由与回压均属于控制面</text>
+
+  <rect x="46" y="178" width="1508" height="579" rx="16" fill="#FCFDFE" stroke="#18324B" stroke-width="2.5"/>
+  <text x="78" y="216" class="t h">SMI FRONT-END / CONTROL DOMAIN</text>
+  <rect x="78" y="241" width="1444" height="278" rx="12" class="plane"/>
+  <text x="104" y="274" class="t h" fill="#7046C7">INGRESS → DECODE → SCHEDULE → DISPATCH</text>
+  <rect x="78" y="547" width="1444" height="176" rx="12" class="plane"/>
+  <text x="104" y="580" class="t h" fill="#007C91">ISSUE QUEUE BANK (logical view)</text>
+
+  <rect x="104" y="324" width="148" height="96" rx="8" class="ext"/>
+  <text x="134" y="360" class="t b">Host / Driver</text><text x="126" y="388" class="t s">command buffer</text>
+  <rect x="292" y="314" width="150" height="116" rx="8" class="ctrl"/>
+  <text x="321" y="348" class="t b">AXI Slave</text><text x="317" y="376" class="t s">AW / W / B</text><text x="317" y="400" class="t s">register write</text>
+  <rect x="482" y="314" width="156" height="116" rx="8" class="ctrl"/>
+  <text x="512" y="348" class="t b">CMD FIFO</text><text x="505" y="376" class="t s">packet buffer</text><text x="505" y="400" class="t s">ordering boundary</text>
+  <rect x="678" y="298" width="184" height="148" rx="8" class="ctrl"/>
+  <text x="714" y="332" class="t b">SMI Decode</text><text x="704" y="360" class="t s">header / opcode</text><text x="704" y="384" class="t s">operand / address</text><text x="704" y="408" class="t s">format validation</text>
+  <rect x="902" y="298" width="184" height="148" rx="8" class="ctrl"/>
+  <text x="925" y="332" class="t b">Control FSM</text><text x="928" y="360" class="t s">loop / delay / branch</text><text x="928" y="384" class="t s">trigger / barrier</text><text x="928" y="408" class="t s">dependency gating</text>
+  <rect x="1126" y="298" width="184" height="148" rx="8" class="ctrl"/>
+  <text x="1151" y="332" class="t b">Micro-op Expand</text><text x="1150" y="360" class="t s">CRU field mapping</text><text x="1150" y="384" class="t s">SID / SMC target</text><text x="1150" y="408" class="t s">issue attributes</text>
+  <rect x="1350" y="314" width="142" height="116" rx="8" class="ctrl"/>
+  <text x="1373" y="348" class="t b">IQ Router</text><text x="1374" y="376" class="t s">select queue</text><text x="1374" y="400" class="t s">ready / valid</text>
+
+  <rect x="678" y="464" width="184" height="42" rx="7" class="ctrl"/>
+  <text x="713" y="491" class="t b">CSR / Config File</text>
+  <rect x="902" y="464" width="184" height="42" rx="7" class="ctrl"/>
+  <text x="943" y="491" class="t b">Perf / Status</text>
+  <rect x="1126" y="464" width="184" height="42" rx="7" class="ctrl"/>
+  <text x="1167" y="491" class="t b">Error / IRQ</text>
+
+  <g>
+    <rect x="126" y="625" width="170" height="58" rx="7" class="data"/><text x="168" y="652" class="t b">IQ[0]</text><text x="150" y="673" class="t xs">compute / memory</text>
+    <rect x="348" y="625" width="170" height="58" rx="7" class="data"/><text x="390" y="652" class="t b">IQ[1]</text><text x="372" y="673" class="t xs">compute / memory</text>
+    <rect x="570" y="625" width="170" height="58" rx="7" class="data"/><text x="606" y="652" class="t b">IQ[…]</text><text x="594" y="673" class="t xs">functional queues</text>
+    <rect x="792" y="625" width="170" height="58" rx="7" class="data"/><text x="834" y="652" class="t b">IQ[92]</text><text x="816" y="673" class="t xs">SMC target queue</text>
+    <rect x="1014" y="625" width="220" height="58" rx="7" class="data"/><text x="1056" y="652" class="t b">IQ Issue Interface</text><text x="1044" y="673" class="t xs">valid · ready · tag</text>
+    <rect x="1286" y="625" width="176" height="58" rx="7" class="ext"/><text x="1331" y="652" class="t b">SMC / CRU</text><text x="1314" y="673" class="t xs">micro-op consumer</text>
+  </g>
+
+  <path d="M252 372 H292" class="line"/><path d="M442 372 H482" class="line"/><path d="M638 372 H678" class="line"/><path d="M862 372 H902" class="line"/><path d="M1086 372 H1126" class="line"/><path d="M1310 372 H1350" class="line"/>
+  <text x="263" y="355" class="t xs" fill="#7046C7">AXI write</text><text x="499" y="355" class="t xs" fill="#7046C7">packet</text><text x="877" y="355" class="t xs" fill="#7046C7">decoded SMI</text><text x="1097" y="355" class="t xs" fill="#7046C7">issue permit</text>
+  <path d="M770 446 V464" class="dash"/><path d="M994 446 V464" class="dash"/><path d="M1218 446 V464" class="dash"/>
+  <path d="M1421 430 V588 H211 V625" class="line"/><path d="M1421 588 H433 V625" class="line"/><path d="M1421 588 H655 V625" class="line"/><path d="M1421 588 H877 V625" class="line"/>
+  <path d="M296 654 H348" class="line"/><path d="M518 654 H570" class="line"/><path d="M740 654 H792" class="line"/><path d="M962 654 H1014" class="line"/><path d="M1234 654 H1286" class="line"/>
+  <path d="M1374 625 V548 H994 V506" class="ret"/><text x="1084" y="540" class="t xs">queue full / ready / completion status</text>
+  <path d="M1086 485 H1126" class="dash"/><path d="M1218 506 V789 H178 V723" class="ret"/><text x="200" y="784" class="t xs">status / interrupt back to Host</text>
+  <text x="54" y="848" class="t s">面试重点：解释 CMD FIFO 为什么隔离 AXI 时序；为何必须有 IQ backpressure；CSR、Trigger、Loop/Delay 何时参与发射判定。</text>
+</svg>
